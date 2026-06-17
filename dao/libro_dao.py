@@ -22,6 +22,7 @@ class LibroDAO:
         conexion.close()
         return libros
 
+    #insertar
     def insertar(self,libro):
         conexion=Conexion.obtener_conexion()
         cursor=conexion.cursor()
@@ -39,6 +40,40 @@ class LibroDAO:
             libro.disponible
             ))
         
+        conexion.commit()
+        cursor.close()
+        conexion.close()
+
+    #update   
+    def actualizar(self,libro):
+        conexion=Conexion.obtener_conexion()
+        cursor=conexion.cursor()
+
+        sql="""
+        UPDATE libro
+        SET TITULO =%s ,autor= =%s,isbn=%s,disponible=%s
+        WHERE id=%s
+        """
+
+        cursor.execute(sql,(
+                       libro.titulo,
+                       libro.autor, 
+                       libro.isbn,
+                       libro.disponible,
+                       libro.id
+                       ))
+        conexion.commit()
+        cursor.close()
+        conexion.close()
+
+    #delete
+    def eliminar(self,id)    :
+
+        conexion=Conexion.obtener_conexion()
+        cursor=conexion.cursor()
+
+        cursor.excute("DELETE FROM libro WHERE id=%s",(id))
+
         conexion.commit()
         cursor.close()
         conexion.close()
