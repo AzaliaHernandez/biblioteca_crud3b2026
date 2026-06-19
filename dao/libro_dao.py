@@ -1,21 +1,22 @@
 from database.conexion import Conexion
-from models.libro import libro 
+from models.libro import Libro
 
 class LibroDAO:
     def obtener_todo(self):
         conexion=Conexion.obtener_conexion()
         cursor=conexion.cursor()
 
-        cursor.excute("SELECT *FROM libro ")
+        cursor.execute("SELECT * FROM libro ")
         registros=cursor.fetchall()
 
         libros=[]
         for registro in registros:
-            libro =libro(
+            libro =Libro(
             id=registro[0],
-            autor=registro[1],
-            isbn=registro[2],
-            disponible=registro[3]
+            titulo= registro[1],
+            autor=registro[2],
+            isbn=registro[3],
+            disponible=registro[4]
             )
             libros.append(libro)
         cursor.close()
@@ -29,11 +30,12 @@ class LibroDAO:
 
 
         sql="""
-        INSERT INTO libro(titulo,autor,isbn,disponible)
-        VALUES ( %s, %s, %s , %s)
+        INSERT INTO libro(id,titulo,autor,isbn,disponible)
+        VALUES ( %s, %s, %s , %s, %s)
         """
             
         cursor.excute(sql,(
+            libro.id,
             libro.titulo,
             libro.autor,
             libro.isbn,
@@ -72,8 +74,22 @@ class LibroDAO:
         conexion=Conexion.obtener_conexion()
         cursor=conexion.cursor()
 
-        cursor.excute("DELETE FROM libro WHERE id=%s",(id))
+        cursor.execute("DELETE FROM libro WHERE id=%s",(id))
 
         conexion.commit()
         cursor.close()
         conexion.close()
+
+    def obtener_ultimo_id(self):
+        conexion=Conexion.obtener_conexion()
+        cursor=conexion.cursor()
+
+        cursor.execute("SELECT MAX (id) FROM LIBRO")
+        resultado=cursor.fetchone()
+
+        cursor.close()
+        conexion.close()
+        
+        if resultado[0] is None:
+            return 0
+        return resultado[0]
