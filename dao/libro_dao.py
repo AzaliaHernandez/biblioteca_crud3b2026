@@ -6,7 +6,19 @@ class LibroDAO:
         conexion=Conexion.obtener_conexion()
         cursor=conexion.cursor()
 
-        cursor.execute("SELECT * FROM libro ")
+        sql="""
+        SELECT
+            l.id,
+            l.titulo,
+            a.nombre AS autor,
+            l.isbn,
+            l.disponible
+        FROM libro l
+        INNER JOIN autor a
+        ON l.autor= a.id
+        """
+
+        cursor.execute(sql)
         registros=cursor.fetchall()
 
         libros=[]
@@ -34,7 +46,7 @@ class LibroDAO:
         VALUES ( %s, %s, %s , %s, %s)
         """
             
-        cursor.excute(sql,(
+        cursor.execute(sql,(
             libro.id,
             libro.titulo,
             libro.autor,
@@ -53,7 +65,7 @@ class LibroDAO:
 
         sql="""
         UPDATE libro
-        SET TITULO =%s ,autor= =%s,isbn=%s,disponible=%s
+        SET TITULO =%s ,autor=%s,isbn=%s,disponible=%s
         WHERE id=%s
         """
 
@@ -74,7 +86,7 @@ class LibroDAO:
         conexion=Conexion.obtener_conexion()
         cursor=conexion.cursor()
 
-        cursor.execute("DELETE FROM libro WHERE id=%s",(id))
+        cursor.execute("DELETE FROM libro WHERE id=%s",(id,))
 
         conexion.commit()
         cursor.close()

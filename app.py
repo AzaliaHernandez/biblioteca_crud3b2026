@@ -8,7 +8,7 @@ def ver_libros():
                 print("No hay libros registrados")
             else:
                 for libro in libros:
-                    print(f"{libro.id} {libro.titulo} {libro.autor}{libro.isbn}{libro.disponible}")
+                    print(f"{libro.id} - {libro.titulo} -{libro.autor}- {libro.isbn} -{libro.disponible}")
                 print("\n Conexion exitosa con la base de datos")
     except Exception as e:
                 print("ERROR")
@@ -37,7 +37,7 @@ def actualizar_libro ():
     try:
         libro_dao=LibroDAO()
         print("Lista de libros disponibles") 
-        libro_dao.obtener_todo()
+        ver_libros()
         id=int(input("Selelciona el id del libro a actualizar"))    
         titulo=input("Escribe el titulo:")
         autor=int(input("Escribe el id del autor:"))
@@ -54,11 +54,12 @@ def eliminar_libro ():
     try:
         libro_dao=LibroDAO()       
         print("Lista de libros disponibles")
-        libro_dao.obtener_todo()
+        ver_libros()
         id=int(input("Escribe el id del libro que va eliminar:"))
         libro_dao.eliminar(id)
+        print(f"El libro {id} ha sido eleminado con exito")
     except Exception as e: 
-        print(f"Error al eliminra el libro{id}")     
+        print(f"Error al eliminar el libro{id}")     
         print(e)
 
 
