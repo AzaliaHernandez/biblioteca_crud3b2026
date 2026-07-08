@@ -1,10 +1,11 @@
 class Usuario:
 
-    def __init__(self, id, nombre, matricula, carrera, correo, activo):
+    def __init__(self, id, nombre,  carrera, matricula, correo, activo):
         self.id = id 
         self.nombre = nombre
-        self.matricula = matricula
         self.carrera = carrera
+        self.matricula = matricula
+        
         self.correo = correo
         self.activo = activo
 
