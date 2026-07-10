@@ -1,3 +1,5 @@
+import flet  as ft
+from ui.main_window import main_window
 from dao.libro_dao import LibroDAO
 from models.libro import Libro
 from dao.usuario_dao import UsuarioDAO
@@ -194,21 +196,22 @@ def menu_usuario  ():
         case 3:
             actualizar_usuarios()
         case 4:
-            eliminar_usuarios()      
+            eliminar_usuarios()    
+ft.app(target=main_window)  
 
 
-def main():
-    print("===BIBLIOTECA UNIVERSITARIA===")
-    print("Menu de opciones:")
-    print("1.Libros ")
-    print("2.Usuarios")  
-    opcion=int(input("Escribe tu opcion: "))
-    match opcion:
-        case 1:menu_libros()
-        case 2:menu_usuario()
-    print("Saliendo del sistema de la biblioteca universitaria ...")    
+# def main():
+#     print("===BIBLIOTECA UNIVERSITARIA===")
+#     print("Menu de opciones:")
+#     print("1.Libros ")
+#     print("2.Usuarios")  
+#     opcion=int(input("Escribe tu opcion: "))
+#     match opcion:
+#         case 1:menu_libros()
+#         case 2:menu_usuario()
+#     print("Saliendo del sistema de la biblioteca universitaria ...")    
 
 
 
-if __name__=="__main__":
-    main()       
+# if __name__=="__main__":
+#     main()       
