@@ -54,19 +54,19 @@ def main_window(page: ft.Page):
                 ft.Divider(color=ft.Colors.BLUE_GREY_700),
                 #botones
                 ft.ElevatedButton(
-                "Libros",
-                icon=ft.Icons.BOOK,
-                widht=180
+                    "Libros",
+                    icon=ft.Icons.BOOK,
+                    width=180
                 ),
                 ft.ElevatedButton(
-                "Prestamos",
-                icon=ft.Icons.SWAP_HORIZ,
-                widht=180
+                    "Prestamos",
+                    icon=ft.Icons.SWAP_HORIZ,
+                    width=180
                 ),
                 ft.ElevatedButton(
-                "Devoluciones",
-                icon=ft.Icons.KEYBOARD_RETURN,
-                widht=180
+                    "Devoluciones",
+                    icon=ft.Icons.KEYBOARD_RETURN,
+                    width=180
                 ),
             ],
             spacing=15

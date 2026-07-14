@@ -196,7 +196,9 @@ def menu_usuario  ():
         case 3:
             actualizar_usuarios()
         case 4:
-            eliminar_usuarios()    
+            eliminar_usuarios()
+            
+                
 ft.app(target=main_window)  
 
 
