@@ -25,68 +25,79 @@ def main_window(page: ft.Page):
 
     #Creacion del contenedor
     contenido=ft.Container(
-        content=ft.Column(
-        controls=[
-            titulo,
-            subtitulo
-        ] ,   
-        spacing=10,
-        ),
-        padding=30,
-        expand=True
-    )
-  
+            padding=30,
+            expand=True
+        )
+    def inicio():
+            return ft.Column(
+            controls=[
+                titulo,
+                subtitulo
+            ] ,   
+            spacing=10
+        )
+    
+    def mostrar_inicio(e=None):
+            contenido.content = inicio()
+            page.update()
 
     #Menu lateral
-    def mostrar_formulario_libro(e):
-        contenido.content = libro_form()
+    def mostrar_formulario_libro(e=None):
+        contenido.content = libro_form(mostrar_inicio)
         page.update()
     #crear el menu lateral 
     menu_lateral = ft.Container(
-         width= 220,
-         bgcolor= ft.Colors.BLUE_GREY_900,
-         padding= 20,
-         content= ft.Column(
-             controls = [
-                 ft.Text(
-                     "Biblioteca",
-                     size = 22,
-                     weight = ft.FontWeight.BOLD,
-                     color = ft.Colors.WHITE
-                 ),
-                 ft.Text(
+        width= 220,
+        bgcolor= ft.Colors.BLUE_GREY_900,
+            
+        padding= 20,
+        content= ft.Column(
+            controls = [
+                ft.Text(
+                    "Biblioteca",
+                    size = 22,
+                    weight = ft.FontWeight.BOLD,
+                    color = ft.Colors.WHITE
+                ),
+                ft.Text(
                     "Sistema de Gestion",
                     size = 12,
                     color = ft.Colors.WHITE
-                 ),
-                 ft.Divider(color = ft.Colors.BLUE_GREY_700),
-                 #Botones
-                 ft.ElevatedButton(
-                   "Libros",
-                   icon =ft.Icons.BOOK,
-                   width = 180 ,
-                   on_click= mostrar_formulario_libro
-                 ),
-                   ft.ElevatedButton(
-                   "Usuarios",
-                   icon =ft.Icons.PERSON,
-                   width = 180  
-                 ),
-                   ft.ElevatedButton(
-                   "Prestamos",
-                   icon =ft.Icons.SWAP_HORIZ,
-                   width = 180  
-                 ),
-                   ft.ElevatedButton(
-                   "Devoluciones",
-                   icon =ft.Icons.KEYBOARD_RETURN,
-                   width = 180  
-                 ),
-             ],
-             spacing = 15
-         )
-     )
-    
+                ),
+                ft.Divider(color = ft.Colors.BLUE_GREY_700),
+                    #Botones
+                ft.ElevatedButton(
+                    "Inicio",
+                    icon=ft.Icons.HOME,
+                    width=180,
+                    on_click=mostrar_inicio
+                ),
+                ft.ElevatedButton(
+                    "Libros",
+                    icon =ft.Icons.BOOK,
+                    width = 180 ,
+                    on_click= mostrar_formulario_libro
+                    ),
+                    ft.ElevatedButton(
+                    "Usuarios",
+                    icon =ft.Icons.PERSON,
+                    width = 180  
+                    ),
+                    ft.ElevatedButton(
+                    "Prestamos",
+                    icon =ft.Icons.SWAP_HORIZ,
+                    width = 180  
+                    ),
+                    ft.ElevatedButton(
+                    "Devoluciones",
+                    icon =ft.Icons.KEYBOARD_RETURN,
+                    width = 180  
+                    ),
+                ],
+                spacing = 15
+            )
+        )
+        
     #layout de la pagina
     layout=ft.Row(
         controls=[
@@ -97,4 +108,6 @@ def main_window(page: ft.Page):
     )
     
     page.add(layout)
+    
+    mostrar_inicio()
 
